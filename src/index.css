@@ -1,13 +1,217 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg-from:#cfe4f6;
+  --bg-mid:#7bc7e3;
+  --bg-to:#e6f9fb;
+
+  --content-width: 900px;
+  --paw-size: 173.45px;
+
+  --blue-soft:#e6f6ff;
+  --blue-border:#b9e6fb;
+  --blue-main:#3cabda;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ===== Base ===== */
+html,body,#root{
+  height:100%;
+  margin:0;
+}
+
+body{
+  font-family: Inter, system-ui;
+  background: linear-gradient(110deg,var(--bg-from),var(--bg-mid),var(--bg-to));
+}
+
+/* ===== Fixed Figma frame ===== */
+.app-container{
+  width:1625px;
+  height:920px;
+  position:absolute;
+  top:80px;
+  left:148px;
+}
+
+.figma-card{
+  width:100%;
+  height:100%;
+  padding:19.31px;
+  border-radius:50px;
+  background: linear-gradient(
+    112.86deg,
+    rgba(255,255,255,0.4),
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.4)
+  );
+  box-shadow:0 43px 69px rgba(0,0,0,0.63);
+  backdrop-filter:blur(14px);
+}
+
+.figma-inner{
+  width:100%;
+  height:100%;
+  background:#ffffff;
+  border-radius:40px;
+  padding:48px 64px;
+  position:relative;
+  box-sizing:border-box;
+  box-shadow:0 18px 36px rgba(0,0,0,0.08);
+}
+
+/* ===== Header ===== */
+.heading-title{
+  font-family:"DM Serif Display",serif;
+  font-size:80px;
+  font-style:italic;
+  text-align:center;
+  background:linear-gradient(90deg,#15313D,#3CABDA);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.heading-sub{
+  margin-top:10px;
+  padding:8px 16px;
+  background:#ffffff;
+  border-radius:8px;
+  font-size:16px;
+  color:#475569;
+  display:inline-block;
+}
+
+/* ===== Progress ===== */
+.progress-row{
+  width:var(--content-width);
+  margin:28px auto 0;
+  display:flex;
+  gap:16px;
+}
+
+.progress-bar{
+  flex:1;
+  height:6px;
+  border-radius:6px;
+  background:#e8f3fa;
+}
+
+.progress-bar.active{
+  background:linear-gradient(90deg,#15313D,#3CABDA);
+}
+
+/* ===== Question ===== */
+.question-selected{
+  width:var(--content-width);
+  margin:28px auto 0;
+  padding:18px;
+  background:#e9f8ff;
+  border-radius:10px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  color:#15313D;
+}
+
+/* ===== Options (FIXED WIDTH ISSUE) ===== */
+.options-wrapper{
+  width: var(--content-width);
+  margin: 5px auto 0;
+}
+
+.option-btn{
+  width: 100%;
+  padding: 20px;
+  margin-top: 14px;
+  
+
+  /* FIX: prevent pill overflow illusion */
+  border-radius: 10px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1.5px solid var(--blue-border);
+  font-size: 18px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.option-btn:hover{
+  background:var(--blue-soft);
+  transform:translateY(-2px);
+}
+
+.option-selected{
+  background:#dff3ff;
+  border-color:var(--blue-main);
+  box-shadow:none;
+}
+
+/* ===== Navigation ===== */
+.nav-area{
+  position:absolute;
+  right:64px;
+  bottom:48px;
+  display:flex;
+  gap:12px;
+}
+
+.nav-btn{
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background:var(--blue-soft);
+  border:none;
+  box-shadow:0 10px 22px rgba(0,0,0,0.08);
+}
+
+/* ===== Buttons ===== */
+.submit-btn,
+.restart-btn{
+  background:linear-gradient(90deg,#2fa4d9,#3cabda);
+  padding:14px 36px;
+  border-radius:14px;
+  border:none;
+  color:#ffffff;
+  font-weight:700;
+  box-shadow:0 16px 36px rgba(60,171,218,0.45);
+  cursor:pointer;
+}
+
+/* ===== Paw (FIXED LEFT ALIGNMENT) ===== */
+.paw-sticker{
+  position: absolute;
+  width: 173.45px;
+  height: 173.45px;
+
+  /* FIXED: left rim alignment like Figma */
+  left: -10px;
+  bottom: 1px;
+
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ===== Result Page (UNCHANGED) ===== */
+.result-page-root{
+  width:100vw;
+  height:100vh;
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.result-card{
+  text-align:center;
+}
+
+.result-score{
+  font-family:"DM Serif Display",serif;
+  font-size:180px;
+  color:#2B6F8F;
+  margin-top:12px;
 }
